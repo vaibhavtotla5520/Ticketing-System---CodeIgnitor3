@@ -11,7 +11,7 @@
         <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
             <div class="card">
                 <div class="card-body px-0 pb-2">
-                    <div class="table-responsive" id="ticketContainer">
+                    <div class="table-responsive text-center" id="ticketContainer">
 
                     </div>
                 </div>

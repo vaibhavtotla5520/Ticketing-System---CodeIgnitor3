@@ -44,7 +44,7 @@ if (empty($this->session->userdata('id'))) {
         <hr class="horizontal light mt-0 mb-2">
         <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
             <ul class="navbar-nav">
-                <?php if (in_array($this->session->userdata('role_id'), [1, 9])) { ?>
+                <?php if (in_array($this->session->userdata('role_id'), [1, 6, 7, 9])) { ?>
                     <li class="nav-item">
                         <a class="nav-link text-white active bg-gradient-primary" href="<?= base_url('create-ticket') ?>">
                             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">

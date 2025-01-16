@@ -15,6 +15,8 @@ class AuthModel extends CI_Model
             ->from('users')
             ->where('email', $user_email)
             ->where('password', $user_password)
+            ->where('is_active', 1)
+            ->where('is_deleted', 0)
             ->get();
 
         if ($result->num_rows() > 0) {

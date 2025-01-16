@@ -295,6 +295,7 @@
                                 <th scope="col">Ticket ID</th>
                                 <th scope="col">Subject</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Assigned To</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Created By</th>
                                 <th scope="col">Action</th>
@@ -320,6 +321,7 @@
                             <th scope="row">${ticket.id}</th>
                             <td>${ticket.title}</td>
                             <td><span class="badge badge-sm bg-gradient-${statusBadge}">${ticket.status}</span></td>
+                            <td>-</td>
                             <td>${ticket.created_at}</td>
                             <td>${ticket.name}</td>
                             <td>
@@ -464,6 +466,7 @@
             if (response.status === "success") {
                 $.notify("User updated successfully.", "success");
                 $("#editUserModal").modal("hide");
+                window.location.reload();
             } else {
                 $.notify("Failed to update user.", "error");
             }

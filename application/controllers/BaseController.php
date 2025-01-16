@@ -165,6 +165,7 @@ class BaseController extends CI_Controller
             ->join('master_roles MR', 'MR.id = UR.role_id', 'left')
             ->join('users U2', 'U2.id = U.created_by', 'left')
             ->limit($config['per_page'], $page)
+            ->order_by('U.id', 'DESC')
             ->get()
             ->result_array();
         $data['pagination'] = $this->pagination->create_links();
@@ -188,6 +189,41 @@ class BaseController extends CI_Controller
             echo json_encode(['status' => 'success', 'data' => $user]);
         } else {
             echo json_encode(['status' => 'error', 'message' => 'User not found.']);
+        }
+    }
+
+    public function updateUser()
+    {
+        $user_id = $this->input->post('user_id');
+
+        $name = $this->input->post('name');
+        $email = $this->input->post('email');
+        $role_id = $this->input->post('role');
+        $is_active = $this->input->post('status');
+        $is_deleted = 0;
+        if ($is_active == 0) {
+            $is_deleted = 1;
+        }
+        $users_data = [
+            "name" => $name,
+            "email" => $email,
+            "is_active" => $is_active,
+            "is_deleted" => $is_deleted,
+            "updated_at" => date('Y-m-d H:i:s'),
+            "updated_by" => $this->session->userdata("id")
+        ];
+
+        $roles_data = [
+            "role_id" => $role_id
+        ];
+        $this->db->where('user_id', $user_id);
+        $this->db->update('user_roles', $roles_data);
+        
+        $this->db->where('id', $user_id);
+        if ($this->db->update('users', $users_data)) {
+            echo json_encode(['status' => 'success', 'message' => 'User updated successfully.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Failed to update user.']);
         }
     }
 }
